@@ -2,6 +2,12 @@
 public class Main {
     public static void main(String[] args) {
 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         // Создаем автосалон, работающий с покупателями и поставщиком авто
         Autosalon autosalon = new Autosalon();
         // Потоки покупателей объединим в группу
@@ -9,6 +15,7 @@ public class Main {
         new Thread(customers, autosalon::sellCar, "Покупатель-1").start();
         new Thread(customers, autosalon::sellCar, "Покупатель-2").start();
         new Thread(customers, autosalon::sellCar, "Покупатель-3").start();
+
 
         // Поток поставщика авто
         Thread salon = new Thread(autosalon::receiveCar, "Toyota");
@@ -22,7 +29,6 @@ public class Main {
         } catch (InterruptedException ignored) {
 
         }
-
 
     }
 }
